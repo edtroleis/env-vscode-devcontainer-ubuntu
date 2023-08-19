@@ -26,7 +26,7 @@
   "remoteUser": "root",
 
   "mounts": [
-    "source=e:\\work,target=/workspaces/vscode-remote-ubuntu/work,type=bind,consistency=cached",
+    "source=e:\\work,target=/workspaces/vscode-devcontainer-ubuntu/work,type=bind,consistency=cached",
     "source=//var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
   // "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/data,type=bind,consistency=cached"],
