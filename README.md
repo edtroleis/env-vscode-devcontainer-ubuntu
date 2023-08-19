@@ -1,5 +1,7 @@
 # Dev Container
 
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/edtroleis/vscode-devcontainer-ubuntu)
+
 A **development container** is a running container with a well-defined tool/runtime stack and its prerequisites.
 
 The Visual Studio Code Dev Containers extension lets you use a container as a full-featured development environment. It allows you to open any folder inside (or mounted into) a container and take advantage of Visual Studio Code's full feature set.
