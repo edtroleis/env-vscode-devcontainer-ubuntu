@@ -67,5 +67,8 @@
 		}
 	},
 
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "pip3 install -r requirements.txt",
+	
   "runArgs": ["--network", "host", "--add-host=host.docker.internal:host-gateway"]
 }
