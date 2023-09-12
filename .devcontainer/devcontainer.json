@@ -64,7 +64,8 @@
         "redhat.vscode-yaml",
         "yzhang.markdown-all-in-one",
         "codezombiech.gitignore",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "bierner.markdown-mermaid"
       ]
     }
   },

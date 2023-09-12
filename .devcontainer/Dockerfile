@@ -10,6 +10,7 @@ ARG KUBECTL_VERSION=v1.28.0
 ARG LINKCHECKER_VERSION=1.4.0
 ARG ANSIBLE_VERSION=8.3.0
 ARG PACKER_VERSION=1.9.4-1
+ARG ARGOCD_CLI_VERSION=v2.8.3
 ARG HOME_DIR=/data
 
 USER root
@@ -91,6 +92,11 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
 
 # Ansible
 RUN pip3 install ansible==${ANSIBLE_VERSION}
+
+# Argo CD cli - versions from https://github.com/argoproj/argo-cd/releases
+RUN curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_CLI_VERSION}/argocd-linux-amd64 \
+  && install -m 555 argocd-linux-amd64 /usr/local/bin/argocd \
+  && rm argocd-linux-amd64
 
 # Linkchecker for Markdown-based static generated sites - https://pypi.org/project/linkcheckmd/
 # RUN pip3 install linkcheckmd==${LINKCHECKER_VERSION}

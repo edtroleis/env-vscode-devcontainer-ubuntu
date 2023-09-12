@@ -17,6 +17,7 @@ The Visual Studio Code Dev Containers extension lets you use a container as a fu
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
 - [Packer](https://www.packer.io/)
 - [Ansible](https://www.ansible.com/)
+- [Argo CD](https://argoproj.github.io/cd/)
 
 # Dev container configuration files
 
