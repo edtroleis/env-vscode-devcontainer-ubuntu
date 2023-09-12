@@ -15,8 +15,15 @@ The Visual Studio Code Dev Containers extension lets you use a container as a fu
 - [Infracost](https://www.infracost.io/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/)
+- [Packer](https://www.packer.io/)
+- [Ansible](https://www.ansible.com/)
 
-# Setting up the development container
+# Dev container configuration files
+
+- [Dockerfile](./.devcontainer/Dockerfile)
+- [devcontainer.json](./.devcontainer/devcontainer.json)
+
+# Setting up the dev container
 
 ## 1. Requirements
 
@@ -45,3 +52,7 @@ git clone ...
 - [Devloping inside a container](https://code.visualstudio.com/docs/devcontainers/containers)
 - [Templates](https://containers.dev/templates)
 - [Using images, Dockerfiles, and Docker Compose](https://containers.dev/guide/dockerfile)
+
+# Notes
+
+- [Notes](NOTES.md)

@@ -32,19 +32,19 @@
   // "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/data,type=bind,consistency=cached"],
 
   "customizations": {
-		// Configure properties specific to VS Code.
-		"vscode": {
-			// Set *default* container specific settings.json values on container create.
-			"settings": {
-				"editor.formatOnSave": true,
-				"files.insertFinalNewline": true,
-				"[makefile]": {
-					"editor.insertSpaces": false,
-					"editor.detectIndentation": false
-				}
-			},
-			// Add the IDs of extensions you want installed when the container is created.
-			"extensions": [
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "[makefile]": {
+          "editor.insertSpaces": false,
+          "editor.detectIndentation": false
+        }
+      },
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
         "DavidAnson.vscode-markdownlint",
         "hashicorp.terraform",
         "ms-azuretools.azure-dev",
@@ -62,13 +62,20 @@
         "ms-azuretools.vscode-docker",
         "redhat.ansible",
         "redhat.vscode-yaml",
-        "yzhang.markdown-all-in-one"
-			]
-		}
-	},
+        "yzhang.markdown-all-in-one",
+        "codezombiech.gitignore",
+        "eamodio.gitlens"
+      ]
+    }
+  },
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "pip3 install -r requirements.txt",
-	
-  "runArgs": ["--network", "host", "--add-host=host.docker.internal:host-gateway"]
+
+  "runArgs": [
+    "--network",
+    "host",
+    "--add-host=host.docker.internal:host-gateway"
+  ]
+  // "runArgs": ["--network=host"]
 }

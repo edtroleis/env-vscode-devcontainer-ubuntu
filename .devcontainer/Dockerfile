@@ -4,16 +4,24 @@ ARG TERRAFORM_VERSION=1.5.5-1
 ARG TERRAFORM_DOCS_VERSION=v0.16.0
 ARG TFLINT_VERSION=v0.47.0
 ARG CHECKOV_VERSION=2.4.1
-ARG INRACOST_VERSION=v0.10.28
-ARG AZCLI_VERSION=2.51.0-1~jammy
+ARG INFRACOST_VERSION=v0.10.28
+ARG AZCLI_VERSION=2.52.0-1~jammy
 ARG KUBECTL_VERSION=v1.28.0
+ARG LINKCHECKER_VERSION=1.4.0
+ARG ANSIBLE_VERSION=8.3.0
+ARG PACKER_VERSION=1.9.4-1
 ARG HOME_DIR=/data
 
 USER root
 
 RUN apt update \
-  && apt install -y software-properties-common gnupg gnupg2 \
-  apt-transport-https ca-certificates lsb-release \
+  && apt install -y software-properties-common \
+  gnupg \
+  gnupg2 \
+  apt-transport-https \
+  ca-certificates \
+  lsb-release \
+  vim \
   curl \
   unzip \
   python3-pip \
@@ -21,7 +29,9 @@ RUN apt update \
   bash-completion \
   git \
   tree \
-  bash-completion
+  bash-completion \
+  traceroute \
+  iputils-ping
 
 # Terraform - to view available version terraform: 'apt-cache policy terraform'
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg \
@@ -47,17 +57,7 @@ RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_
 RUN pip3 install checkov==${CHECKOV_VERSION}
 
 # infracost - get api key: 'infracost configure get api_key'
-RUN curl -fsSL https://raw.githubusercontent.com/infracost/infracost/${INRACOST_VERSION}/scripts/install.sh | sh
-
-# WORKDIR ${HOME_DIR}
-
-# CMD ["/bin/bash", "-c"]
-# ENTRYPOINT [ "/bin/bash", "-c" ]
-
-# Check internet
-# curl -Is www.google.com | head -n 1
-
-# USER vscode
+RUN curl -fsSL https://raw.githubusercontent.com/infracost/infracost/${INFRACOST_VERSION}/scripts/install.sh | sh
 
 # azcli - to view available version az cli: 'apt-cache policy azure-cli'
 RUN mkdir -p /etc/apt/keyrings \
@@ -65,10 +65,10 @@ RUN mkdir -p /etc/apt/keyrings \
   && chmod go+r /etc/apt/keyrings/microsoft.gpg \
   && AZ_REPO=$(lsb_release -cs) \
   && echo "deb [arch=`dpkg --print-architecture` signed-by=/etc/apt/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | tee /etc/apt/sources.list.d/azure-cli.list \
-  && apt-get update \
-  && apt-get install azure-cli=${AZCLI_VERSION}
+  && apt update \
+  && apt install azure-cli=${AZCLI_VERSION}
 
-# docke cli
+# docker cli
 RUN install -m 0755 -d /etc/apt/keyrings \
   && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
   && chmod a+r /etc/apt/keyrings/docker.gpg \
@@ -82,3 +82,19 @@ RUN curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubect
   && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
   && kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null \
   && chmod a+r /etc/bash_completion.d/kubectl
+
+# Hashicorp Packer
+RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
+  && apt-add-repository -y "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
+  && apt update \
+  && apt install -y packer=${PACKER_VERSION}
+
+# Ansible
+RUN pip3 install ansible==${ANSIBLE_VERSION}
+
+# Linkchecker for Markdown-based static generated sites - https://pypi.org/project/linkcheckmd/
+# RUN pip3 install linkcheckmd==${LINKCHECKER_VERSION}
+
+# WORKDIR ${HOME_DIR}
+
+# USER vscode
