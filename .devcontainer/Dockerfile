@@ -7,10 +7,12 @@ ARG CHECKOV_VERSION=2.4.1
 ARG INFRACOST_VERSION=v0.10.28
 ARG AZCLI_VERSION=2.52.0-1~jammy
 ARG KUBECTL_VERSION=v1.28.0
+ARG HELM_VERSION=v3.12.3
 ARG LINKCHECKER_VERSION=1.4.0
 ARG ANSIBLE_VERSION=8.3.0
 ARG PACKER_VERSION=1.9.4-1
 ARG ARGOCD_CLI_VERSION=v2.8.3
+ARG SCRIPTS_DIR=./scripts
 ARG HOME_DIR=/data
 
 USER root
@@ -58,7 +60,9 @@ RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_
 RUN pip3 install checkov==${CHECKOV_VERSION}
 
 # infracost - get api key: 'infracost configure get api_key'
+# ADD ${SCRIPTS_DIR}/infracost/credential.yml ${HOME_DIR}/.config/infracost/
 RUN curl -fsSL https://raw.githubusercontent.com/infracost/infracost/${INFRACOST_VERSION}/scripts/install.sh | sh
+# infracost configure set api_key ${HOME_DIR}./config/infracost/credential.yml
 
 # azcli - to view available version az cli: 'apt-cache policy azure-cli'
 RUN mkdir -p /etc/apt/keyrings \
@@ -69,9 +73,11 @@ RUN mkdir -p /etc/apt/keyrings \
   && apt update \
   && apt install azure-cli=${AZCLI_VERSION}
 
+RUN az extension add --name azure-devops
+
 # docker cli
 RUN install -m 0755 -d /etc/apt/keyrings \
-  && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
+  && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg \
   && chmod a+r /etc/apt/keyrings/docker.gpg \
   && echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
   && apt update && apt install -y docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
@@ -83,6 +89,11 @@ RUN curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubect
   && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
   && kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null \
   && chmod a+r /etc/bash_completion.d/kubectl
+
+# helm
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
+  && chmod 700 get_helm.sh \
+  && ./get_helm.sh
 
 # Hashicorp Packer
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \
