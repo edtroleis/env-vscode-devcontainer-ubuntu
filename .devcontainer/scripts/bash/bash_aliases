@@ -1,0 +1,40 @@
+# Python
+alias py3="python3"
+
+# Minikube
+alias kubectl="minikube kubectl --"
+alias k="minikube kubectl --"
+alias mk="minikube"
+alias mkpl="minikube profile list"
+alias kaf="k apply -f"
+alias kdf="k delete -f"
+alias kp="k get pods"
+alias ks="k get services"
+alias kd="k get deploy"
+alias kn="k get nodes"
+
+# Docker
+alias d="docker"
+alias dc="docker compose"
+
+# Terraform
+alias tfi="terraform init"
+alias tfiu="terraform init -upgrade"
+alias tfir="terraform init -reconfigure"
+alias tfp="terraform plan"
+alias tfa="terraform apply"
+alias tfd="terraform destroy"
+alias tfl="TF_LOG=\"INFO\""                     # TRACE, DEBUG, INFO, WARN orERROR
+
+# Terraform-docs
+alias tfdocs="terraform-docs markdown"
+
+# Infracost
+alias icb="infracost breakdown --path ."        # breakdown: show full breakdown of costs
+alias icd="infracost diff --path ."             # diff: show diff of monthly costs between current and planned state
+
+# Checkov
+alias tf_checkov="tfp; tf show -json plan.tfplan | jq '.' > plan.json; checkov -f plan.json"
+
+# Packer
+alias pkr_log_level="PACKER_LOG=10"

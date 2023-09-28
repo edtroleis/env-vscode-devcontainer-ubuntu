@@ -3,15 +3,15 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 ARG TERRAFORM_VERSION=1.5.5-1
 ARG TERRAFORM_DOCS_VERSION=v0.16.0
 ARG TFLINT_VERSION=v0.47.0
-ARG CHECKOV_VERSION=2.4.1
+ARG CHECKOV_VERSION=2.4.50
 ARG INFRACOST_VERSION=v0.10.28
 ARG AZCLI_VERSION=2.52.0-1~jammy
 ARG KUBECTL_VERSION=v1.28.0
 ARG HELM_VERSION=v3.12.3
+ARG ARGOCD_CLI_VERSION=v2.8.3
 ARG LINKCHECKER_VERSION=1.4.0
 ARG ANSIBLE_VERSION=8.3.0
 ARG PACKER_VERSION=1.9.4-1
-ARG ARGOCD_CLI_VERSION=v2.8.3
 ARG SCRIPTS_DIR=./scripts
 ARG HOME_DIR=/data
 
@@ -52,7 +52,7 @@ RUN curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/${TERRAFORM_
   && rm terraform-docs.tar.gz
 
 # tflint
-ADD ./scripts/tflint.hcl ${HOME_DIR}/.tflint.hcl
+ADD ./scripts/tflint/tflint.hcl ${HOME_DIR}/.tflint.hcl
 RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_VERSION}/install_linux.sh | bash \
   && tflint --init
 
