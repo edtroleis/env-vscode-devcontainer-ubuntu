@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+# set -ex
 
 SCRIPTS_DIR=".devcontainer/scripts"
 MOUNT_HOME_DIR="/host-home-folder"
@@ -11,8 +11,10 @@ MOUNT_HOME_DIR="/host-home-folder"
 
 # printf "Copying ssh keys...\n"
 # cp -r $SCRIPTS_DIR/.ssh $HOME
-# chmode -R 400 $HOME/.ssh
+# chmod -R 400 $HOME/.ssh
 
-# printf "Configuring alias...\n"
-# cp $PWD/$SCRIPTS_DIR/bash_aliases ~/.bash_aliases
-# source ~/.bash_aliases
+printf "Configuring bash...\n"
+cat ${SCRIPTS_DIR}/bash/bashrc >> ~/.bashrc
+cp ${SCRIPTS_DIR}/bash/bash_aliases ${HOME}/.bash_aliases
+source ~/.bashrc
+source ~/.bash_aliases

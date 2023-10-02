@@ -45,8 +45,15 @@
       },
       // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
+        "adamiBs.terraform-live-graph",
         "DavidAnson.vscode-markdownlint",
+        "AykutSarac.jsoncrack-vscode",
+        "esbenp.prettier-vscode",
+        "Blackboxapp.blackbox",
         "hashicorp.terraform",
+        "Bridgecrew.checkov",
+        "Infracost.infracost",
+        "ms-azuretools.vscode-azureterraform",
         "ms-azuretools.azure-dev",
         "ms-azuretools.vscode-azurecontainerapps",
         "ms-azuretools.vscode-azurefunctions",
@@ -59,13 +66,21 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-vscode.azure-account",
-        "ms-azuretools.vscode-docker",
         "redhat.ansible",
         "redhat.vscode-yaml",
         "yzhang.markdown-all-in-one",
         "codezombiech.gitignore",
         "eamodio.gitlens",
-        "bierner.markdown-mermaid"
+        "bierner.markdown-mermaid",
+        "ms-azure-devops.azure-pipelines",
+        "TomAustin.azure-devops-yaml-pipeline-validator",
+        "ms-vscode.powershell",
+        "p1c2u.docker-compose",
+        "SonarSource.sonarlint-vscode",
+        "ipedrazas.kubernetes-snippets",
+        "kennylong.kubernetes-yaml-formatter",
+        "mutantdino.resourcemonitor",
+        "raushan2016.vscode-k8s-tree"
       ]
     }
   },

@@ -4,7 +4,7 @@ ARG TERRAFORM_VERSION=1.5.5-1
 ARG TERRAFORM_DOCS_VERSION=v0.16.0
 ARG TFLINT_VERSION=v0.47.0
 ARG CHECKOV_VERSION=2.4.50
-ARG INFRACOST_VERSION=v0.10.28
+ARG INFRACOST_VERSION=v0.10.29
 ARG AZCLI_VERSION=2.52.0-1~jammy
 ARG KUBECTL_VERSION=v1.28.0
 ARG HELM_VERSION=v3.12.3
@@ -54,7 +54,7 @@ RUN curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/${TERRAFORM_
 # tflint
 ADD ./scripts/tflint/tflint.hcl ${HOME_DIR}/.tflint.hcl
 RUN curl -s https://raw.githubusercontent.com/terraform-linters/tflint/${TFLINT_VERSION}/install_linux.sh | bash \
-  && tflint --init
+  && tflint --init --config ${HOME_DIR}/.tflint.hcl
 
 # Checkov
 RUN pip3 install checkov==${CHECKOV_VERSION}
