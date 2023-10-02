@@ -11,7 +11,7 @@ MOUNT_HOME_DIR="/host-home-folder"
 
 # printf "Copying ssh keys...\n"
 # cp -r $SCRIPTS_DIR/.ssh $HOME
-# chmod -R 400 $HOME/.ssh
+# chmod 600 ~/.ssh/*
 
 printf "Configuring bash...\n"
 cat ${SCRIPTS_DIR}/bash/bashrc >> ~/.bashrc
