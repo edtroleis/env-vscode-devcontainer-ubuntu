@@ -84,14 +84,12 @@
   },
 
   // Set container variables
-  // List all local env:  ls Env:
   "containerEnv": {
     "LOCAL_USERNAME": "${localEnv:HOME}${localEnv:USERNAME}",
     "LOCAL_HOME": "${localEnv:HOME}${localEnv:USERPROFILE}"
   },
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "pip3 install -r requirements.txt",
   "postCreateCommand": "/bin/bash .devcontainer/scripts/postCreateCommand.sh",
 
   // "runArgs": ["--network=host"]
