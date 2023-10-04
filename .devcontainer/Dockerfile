@@ -49,7 +49,7 @@ RUN curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/${TERRAFORM_
   && chmod +x terraform-docs \
   && mv terraform-docs /usr/bin/terraform-docs \
   && terraform-docs completion bash > ~/.terraform-docs-completion \
-  && rm terraform-docs.tar.gz
+  && rm terraform-docs.tar.gz && rm -f LICENSE && rm -f README.md
 
 # tflint
 ADD ./scripts/tflint/tflint.hcl ${HOME_DIR}/.tflint.hcl
@@ -88,12 +88,14 @@ RUN install -m 0755 -d /etc/apt/keyrings \
 RUN curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl \
   && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
   && kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null \
-  && chmod a+r /etc/bash_completion.d/kubectl
+  && chmod a+r /etc/bash_completion.d/kubectl \
+  && rm -f kubectl
 
 # helm
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
   && chmod 700 get_helm.sh \
-  && ./get_helm.sh
+  && ./get_helm.sh \
+  && rm -f get_helm.sh
 
 # Hashicorp Packer
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - \

@@ -16,21 +16,19 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
-  // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "uname -a",
-
-  // Configure tool-specific properties.
-  // "customizations": {},
-
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   "remoteUser": "root",
 
   "mounts": [
     "source=e:\\work,target=/workspaces/vscode-devcontainer-ubuntu/work,type=bind,consistency=cached",
+    // "source=${localWorkspaceFolder},target=/work",type=bind,consistency=cached",
+    // "source=/home/${localEnv:USER}/.ssh,target=/root/.ssh,type=bind,readonly",
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}\\.ssh,target=/root/.ssh,type=bind,consistency=cached",
     "source=//var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
   // "mounts": ["source=${localEnv:HOME}${localEnv:USERPROFILE},target=/data,type=bind,consistency=cached"],
 
+  // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.
     "vscode": {
@@ -85,14 +83,21 @@
     }
   },
 
+  // Set container variables
+  // List all local env:  ls Env:
+  "containerEnv": {
+    "LOCAL_USERNAME": "${localEnv:HOME}${localEnv:USERNAME}",
+    "LOCAL_HOME": "${localEnv:HOME}${localEnv:USERPROFILE}"
+  },
+
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "pip3 install -r requirements.txt",
   "postCreateCommand": "/bin/bash .devcontainer/scripts/postCreateCommand.sh",
 
+  // "runArgs": ["--network=host"]
   "runArgs": [
     "--network",
     "host",
     "--add-host=host.docker.internal:host-gateway"
   ]
-  // "runArgs": ["--network=host"]
 }

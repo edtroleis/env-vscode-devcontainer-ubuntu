@@ -9,9 +9,8 @@ MOUNT_HOME_DIR="/host-home-folder"
 # git config --global http.ssVerify false
 # git config --global http.sslBackend "openssl"
 
-# printf "Copying ssh keys...\n"
-# cp -r $SCRIPTS_DIR/.ssh $HOME
-# chmod 600 ~/.ssh/*
+printf "Setting correct permissions to ssh keys...\n"
+chmod 600 ~/.ssh/*
 
 printf "Configuring bash...\n"
 cat ${SCRIPTS_DIR}/bash/bashrc >> ~/.bashrc
