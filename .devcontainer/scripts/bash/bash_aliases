@@ -39,3 +39,9 @@ alias tf_checkov="tfp; tf show -json plan.tfplan | jq '.' > plan.json; checkov -
 
 # Packer
 alias pkr_log_level="PACKER_LOG=10"
+
+# Python
+alias pip_freeze="pip freeze > requirements.txt"
+alias venv_create="python3 -m venv venv"
+alias venv_activate="source venv/bin/activate"
+alias venv_deactivate="source venv/bin/activate"

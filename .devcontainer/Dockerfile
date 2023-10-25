@@ -28,6 +28,7 @@ RUN apt update \
   curl \
   unzip \
   python3-pip \
+	install python3.10-venv \
   jq \
   bash-completion \
   git \
